@@ -10,10 +10,10 @@ Használt csomagok:
 - Microsoft.EntityFrameworkCore.Design
 - Npgsql.EntityFrameworkCore.PostgreSQL
 
-dotnet ef database update hogy legyen adatbázis
+dotnet ef database update hogy legyen adatbázis lokálisan
 
 ## Funkciók
-- Regisztráció és bejelentkezés
+- Regisztráció és bejelentkezés 
 - Admin access, termék feltöltés és ár állítás stb…
 - Felhasználó is szerkesztheti saját termékét amit eladna
 - Felhasználónak fiók leírás - Rólad fül vag valami hasonló
