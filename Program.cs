@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using AppDbContextNamespace.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+ConfigurationManager Configuration = builder.Configuration;
+
+// appsettings-ben a jelszó az legyen ami a postgreSQL-ednek
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
+    Configuration["ConnectionStrings:WebappConnection"]));
 
 var app = builder.Build();
 

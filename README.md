@@ -2,6 +2,15 @@
 
 Téma: Webshop - Ruha bolt használt vagy új
 ASP.NET Core és PostgreSQL
+
+.NET-ből és a NuGeteknél is 8as verzió
+
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Npgsql.EntityFrameworkCore.PostgreSQL
+
+dotnet ef database update hogy legyen adatbázis
+
 ## Funkciók
 - Regisztráció és bejelentkezés
 - Admin access, termék feltöltés és ár állítás stb…
