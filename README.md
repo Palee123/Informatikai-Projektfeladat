@@ -12,6 +12,14 @@ Használt csomagok:
 
 dotnet ef database update hogy legyen adatbázis lokálisan
 
+## Mappák (fontosabbak)
+**Repositories:** Az adatbázis műveletekért felel (lekérdezés, mentés, törlés), és közvetlenül a DbContexttel dolgozik.
+
+**Services:** Az üzleti logikát tartalmazza (pl. validáció, jelszó ellenőrzés, számítások), és a repositorykat használja.
+
+**DTOs:** Az API-n keresztül be- és kimenő adatstruktúrákat definiálja, hogy csak a szükséges adatokat küldjük és fogadjuk.
+
+
 ## Funkciók
 - Regisztráció és bejelentkezés 
 - Admin access, termék feltöltés és ár állítás stb…

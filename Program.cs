@@ -1,5 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using AppDbContextNamespace.Data;
+using Microsoft.EntityFrameworkCore;
+using WebApplication1.Repositories;
+using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,9 @@ ConfigurationManager Configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
     Configuration["ConnectionStrings:WebappConnection"]));
 
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<AuthService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +35,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+//app.UseDefaultFiles();
+
+app.UseStaticFiles();
 
 app.MapControllers();
 
