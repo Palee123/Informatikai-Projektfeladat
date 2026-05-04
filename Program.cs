@@ -1,4 +1,4 @@
-using AppDbContextNamespace.Data;
+﻿using AppDbContextNamespace.Data;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Repositories;
 using WebApplication1.Services;
@@ -15,13 +15,15 @@ builder.Services.AddSwaggerGen();
 
 ConfigurationManager Configuration = builder.Configuration;
 
-// appsettings-ben a jelsz� az legyen ami a postgreSQL-ednek
+// appsettings-ben a jelszó az legyen ami a postgreSQL-ednek
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
     Configuration["ConnectionStrings:WebappConnection"]));
 
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();
 
@@ -43,3 +45,4 @@ app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();
+
