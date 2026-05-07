@@ -26,5 +26,7 @@ namespace WebApplication1.DTOs.Product
         [Required]
         [Range(1, int.MaxValue)]
         public int CategoryId { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }

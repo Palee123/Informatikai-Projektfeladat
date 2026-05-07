@@ -13,7 +13,9 @@ namespace WebApplication1.Models
         public string Type { get; set; }
 
         public string Meret { get; set; }
-        
+
+        public string? ImageUrl { get; set; }
+
 
         public bool IsUsed { get; set; } // új vagy használt
         public DateTime CreatedAt { get; set; }

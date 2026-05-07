@@ -22,10 +22,10 @@ function Navbar() {
 
                 {!user && (
                     <>
-                        <Link to="/login">Login</Link>
+                        <Link to="/login">Belépés</Link>
 
                         <Link to="/register">
-                            Register
+                            Regisztráció
                         </Link>
                     </>
                 )}
@@ -37,7 +37,7 @@ function Navbar() {
                         </Link>
 
                         <button onClick={logout}>
-                            Logout
+                            Kilépés
                         </button>
                     </>
                 )}
