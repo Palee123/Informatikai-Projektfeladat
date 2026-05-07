@@ -10,6 +10,14 @@ namespace WebApplication1.Models
         public required string Email { get; set; }
         public required string PasswordHash { get; set; }
 
+        //szerkeszthető adatok
+        public string? FullName { get; set; }
+        public string? Phone { get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+
+
+
         public string? Role { get; set; } // Admin vagy sima User
 
 

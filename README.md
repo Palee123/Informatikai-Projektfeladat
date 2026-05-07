@@ -19,6 +19,27 @@ dotnet ef database update hogy legyen adatbázis lokálisan
 
 **DTOs:** Az API-n keresztül be- és kimenő adatstruktúrákat definiálja, hogy csak a szükséges adatokat küldjük és fogadjuk.
 
+# Projekt struktúra
+
+## Backend
+ASP.NET Core Web API
+
+## Frontend
+Külön React projekt:
+
+frontend/
+
+A frontend fejlesztés külön fut a backendtől.
+
+---
+
+# Frontend indítása
+
+```bash
+cd frontend
+npm install
+npm run dev
+
 
 ## Funkciók
 - Regisztráció és bejelentkezés 

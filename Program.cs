@@ -1,5 +1,8 @@
 ﻿using AppDbContextNamespace.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WebApplication1.Repositories;
 using WebApplication1.Services;
 
@@ -25,6 +28,50 @@ builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ProductService>();
 
+//frontend miatt 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
+});
+
+
+//JWT - JSON WEB TOKEN
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer =
+                    builder.Configuration["Jwt:Issuer"],
+
+                ValidAudience =
+                    builder.Configuration["Jwt:Audience"],
+
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(
+                            builder.Configuration["Jwt:Key"]
+                        )
+                    )
+            };
+    });
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +83,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowFrontend");   
+
+app.UseAuthentication();            
 app.UseAuthorization();
 
 //app.UseDefaultFiles();

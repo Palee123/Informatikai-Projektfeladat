@@ -9,6 +9,12 @@ namespace WebApplication1.Models
         public string Description { get; set; }
         public decimal Price { get; set; }
 
+        //bőviteni ha kell valami
+        public string Type { get; set; }
+
+        public string Meret { get; set; }
+        
+
         public bool IsUsed { get; set; } // új vagy használt
         public DateTime CreatedAt { get; set; }
 
