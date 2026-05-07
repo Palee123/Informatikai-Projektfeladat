@@ -38,7 +38,7 @@ A frontend fejlesztés külön fut a backendtől.
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run dev			
 
 
 ## Funkciók

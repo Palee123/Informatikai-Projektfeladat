@@ -141,84 +141,88 @@ function Profile() {
 
             <div className="container">
 
-                <h1>Profil</h1>
+                <div className="form-container">
 
-                <h2>Adatok</h2>
+                    <h1>Profil</h1>
 
-                <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    disabled
-                />
+                    <h2>Adatok</h2>
 
-                <input
-                    type="text"
-                    placeholder="Teljes név"
-                    value={fullName}
-                    onChange={(e) =>
-                        setFullName(e.target.value)
-                    }
-                />
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        disabled
+                    />
 
-                <input
-                    type="text"
-                    placeholder="Telefonszám"
-                    value={phone}
-                    onChange={(e) =>
-                        setPhone(e.target.value)
-                    }
-                />
+                    <input
+                        type="text"
+                        placeholder="Teljes név"
+                        value={fullName}
+                        onChange={(e) =>
+                            setFullName(e.target.value)
+                        }
+                    />
 
-                <input
-                    type="text"
-                    placeholder="Cím"
-                    value={address}
-                    onChange={(e) =>
-                        setAddress(e.target.value)
-                    }
-                />
+                    <input
+                        type="text"
+                        placeholder="Telefonszám"
+                        value={phone}
+                        onChange={(e) =>
+                            setPhone(e.target.value)
+                        }
+                    />
 
-                <input
-                    type="text"
-                    placeholder="Város"
-                    value={city}
-                    onChange={(e) =>
-                        setCity(e.target.value)
-                    }
-                />
+                    <input
+                        type="text"
+                        placeholder="Cím"
+                        value={address}
+                        onChange={(e) =>
+                            setAddress(e.target.value)
+                        }
+                    />
 
-                <button onClick={updateProfile}>
-                    Mentés
-                </button>
+                    <input
+                        type="text"
+                        placeholder="Város"
+                        value={city}
+                        onChange={(e) =>
+                            setCity(e.target.value)
+                        }
+                    />
 
-                <hr />
+                    <button onClick={updateProfile}>
+                        Mentés
+                    </button>
 
-                <h2>Jelszó módosítás</h2>
+                    <hr />
 
-                <input
-                    type="password"
-                    placeholder="Jelenlegi jelszó"
-                    value={currentPassword}
-                    onChange={(e) =>
-                        setCurrentPassword(e.target.value)
-                    }
-                />
+                    <h2>Jelszó módosítás</h2>
 
-                <input
-                    type="password"
-                    placeholder="Új jelszó"
-                    value={newPassword}
-                    onChange={(e) =>
-                        setNewPassword(e.target.value)
-                    }
-                />
+                    <input
+                        type="password"
+                        placeholder="Jelenlegi jelszó"
+                        value={currentPassword}
+                        onChange={(e) =>
+                            setCurrentPassword(e.target.value)
+                        }
+                    />
 
-                <button onClick={changePassword}>
-                    Jelszó módosítás
-                </button>
+                    <input
+                        type="password"
+                        placeholder="Új jelszó"
+                        value={newPassword}
+                        onChange={(e) =>
+                            setNewPassword(e.target.value)
+                        }
+                    />
 
-                <p>{message}</p>
+                    <button onClick={changePassword}>
+                        Jelszó módosítás
+                    </button>
+
+                    <p>{message}</p>
+
+                </div>
 
             </div>
         </>

@@ -51,40 +51,44 @@ function Register() {
 
             <div className="container">
 
-                <h2>Regisztráció</h2>
+                <div className="form-container">
 
-                <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) =>
-                        setEmail(e.target.value)
-                    }
-                />
+                    <h2>Regisztráció</h2>
 
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) =>
-                        setUsername(e.target.value)
-                    }
-                />
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) =>
+                            setEmail(e.target.value)
+                        }
+                    />
 
-                <input
-                    type="password"
-                    placeholder="Jelszó"
-                    value={password}
-                    onChange={(e) =>
-                        setPassword(e.target.value)
-                    }
-                />
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) =>
+                            setUsername(e.target.value)
+                        }
+                    />
 
-                <button onClick={register}>
-                    Regisztráció
-                </button>
+                    <input
+                        type="password"
+                        placeholder="Jelszó"
+                        value={password}
+                        onChange={(e) =>
+                            setPassword(e.target.value)
+                        }
+                    />
 
-                <p>{message}</p>
+                    <button onClick={register}>
+                        Regisztráció
+                    </button>
+
+                    <p>{message}</p>
+
+                </div>
 
             </div>
         </>
