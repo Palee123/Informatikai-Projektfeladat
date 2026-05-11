@@ -53,7 +53,10 @@ namespace WebApplication1.Services
                 IsUsed = dto.IsUsed,
                 CreatedAt = DateTime.UtcNow,
                 UserId = dto.UserId,
-                CategoryId = dto.CategoryId
+                CategoryId = dto.CategoryId,
+                Meret = dto.Meret,
+                Type = dto.Type,
+                ImageUrl = dto.ImageUrl
             };
 
             await _productRepository.AddAsync(product);
@@ -113,7 +116,8 @@ namespace WebApplication1.Services
                 UserId = product.UserId,
                 SellerName = product.User?.Username ?? string.Empty,
                 CategoryId = product.CategoryId,
-                CategoryName = product.Category?.Name ?? string.Empty
+                CategoryName = product.Category?.Name ?? string.Empty,
+                ImageUrl = product.ImageUrl
             };
         }
     }
