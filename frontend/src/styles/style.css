@@ -15,6 +15,9 @@
     --primary-hover: #0056b3;
     --hero-bg-1: #111;
     --hero-bg-2: #1e1e1e;
+    --nav-wave-color: %23000000;              /* Fekete hullámok  */
+    --nav-wave-opacity: 0.15;                 /* Világos módban picit finomabb */
+    
 }
 
 [data-theme='dark'] {
@@ -31,6 +34,9 @@
     --primary-hover: #60a5fa;
     --hero-bg-1: #0a0a0a;
     --hero-bg-2: #1a1a1a;
+    --nav-wave-color: %23ffffff;              /* Fehér hullámok */
+    --nav-wave-opacity: 0.12;                 /* Sötét módban lágyabb */
+   
 }
 
 /* =========================================
@@ -56,13 +62,31 @@ body {
     z-index: 1000;
     width: 100%;
     height: 70px;
-    background-color: var(--bg-element);
+    
+    /* VILÁGOS MÓD fekete hullámos minta  */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20c10-15 30-15 40 0s30 15 40 0m-80 10c10-15 30-15 40 0s30 15 40 0M0 0c10-15 30-15 40 0s30 15 40 0m-80 30c10-15 30-15 40 0s30 15 40 0' fill='none' stroke='%23000000' stroke-width='1.5' stroke-opacity='0.15'/%3E%3C/svg%3E");
+    
+    background-color: var(--nav-overlay);
+    background-blend-mode: overlay;
+
+    /* =========================================
+                        ÜVEGHATÁS
+       ========================================= */
+    backdrop-filter: blur(10px);        
+    -webkit-backdrop-filter: blur(10px); /* Safari böngészőhöz is */
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 40px;
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* SÖTÉTMÓD */
+[data-theme='dark'] .header {
+    /* SÖTÉT MÓD fehér hullámos minta*/
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20c10-15 30-15 40 0s30 15 40 0m-80 10c10-15 30-15 40 0s30 15 40 0M0 0c10-15 30-15 40 0s30 15 40 0m-80 30c10-15 30-15 40 0s30 15 40 0' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-opacity='0.12'/%3E%3C/svg%3E");
 }
 
 .logo {
