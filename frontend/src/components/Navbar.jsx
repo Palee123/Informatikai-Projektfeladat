@@ -1,8 +1,8 @@
-﻿import { Link } from "react-router";
+﻿import { Link, useLocation } from "react-router";
 
 function Navbar() {
-
     const user = localStorage.getItem("user");
+    const location = useLocation();
 
     function logout() {
         localStorage.removeItem("user");
@@ -11,39 +11,36 @@ function Navbar() {
 
     return (
         <div className="header">
-
-            <div className="logo">
-                Webshop
-            </div>
+            <Link to="/" className="logo" style={{ textDecoration: 'none', color: '#222' }}>
+                🛍️ Webshop
+            </Link>
 
             <div className="nav">
+                {}
+                <Link to="/" className={location.pathname === "/" ? "active-link" : ""}>
+                    Főoldal
+                </Link>
 
-                <Link to="/">Főoldal</Link>
-
-                {!user && (
+                {!user ? (
                     <>
-                        <Link to="/login">Belépés</Link>
-
-                        <Link to="/register">
+                        <Link to="/login" className={location.pathname === "/login" ? "active-link" : ""}>
+                            Belépés
+                        </Link>
+                        <Link to="/register" className={location.pathname === "/register" ? "active-link" : ""}>
                             Regisztráció
                         </Link>
                     </>
-                )}
-
-                {user && (
+                ) : (
                     <>
-                        <Link to="/profile">
-                            Profil
+                        <Link to="/profile" className={location.pathname === "/profile" ? "active-link" : ""}>
+                            Profilom
                         </Link>
-
                         <button onClick={logout}>
                             Kilépés
                         </button>
                     </>
                 )}
-
             </div>
-
         </div>
     );
 }

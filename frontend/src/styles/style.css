@@ -49,6 +49,29 @@ body {
     color: #007bff;
 }
 
+/* aktiv menüpont  */
+.nav a.active-link {
+    color: #007bff;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 4px;
+}
+
+.nav button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #dc3545;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav button:hover {
+    background-color: #b52a37;
+}
+
 /* PAGE */
 
 .container {
