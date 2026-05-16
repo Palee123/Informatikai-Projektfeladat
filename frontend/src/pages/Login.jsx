@@ -35,7 +35,7 @@ function Login() {
             {/* Középre igazít */}
             <div className="container" style={{ minHeight: "calc(100vh - 150px)", display: "flex", alignItems: "center" }}>
                 <div className="form-container">
-                    <h2 style={{ textAlign: "center", color: "#111", marginBottom: "20px" }}>Bejelentkezés</h2>
+                    <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Bejelentkezés</h2>
 
                     <label className="input-label">E-mail cím</label>
                     <input
