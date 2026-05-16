@@ -3,134 +3,76 @@ import { apiFetch } from "../services/api";
 import Navbar from "../components/Navbar";
 
 function Profile() {
-
     const [email, setEmail] = useState("");
-
     const [fullName, setFullName] = useState("");
-
     const [phone, setPhone] = useState("");
-
     const [address, setAddress] = useState("");
-
     const [city, setCity] = useState("");
-
-    const [currentPassword, setCurrentPassword] =
-        useState("");
-
-    const [newPassword, setNewPassword] =
-        useState("");
-
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-
         loadProfile();
-
     }, []);
 
     async function loadProfile() {
-        //console.log(user);
         try {
-
-            const user = JSON.parse(
-                localStorage.getItem("user")
-            );
-
+            const user = JSON.parse(localStorage.getItem("user"));
             if (!user) {
                 window.location.href = "/login";
                 return;
             }
 
-            const response = await apiFetch(
-                "/profile"
-            );
-
+            const response = await apiFetch("/profile");
             if (!response.ok) {
-                setMessage("Hiba történt");
+                setMessage("Hiba történt az adatok betöltésekor");
                 return;
             }
 
             const data = await response.json();
-
             setEmail(data.email || "");
             setFullName(data.fullName || "");
             setPhone(data.phone || "");
             setAddress(data.address || "");
             setCity(data.city || "");
-
-        }
-        catch {
-
+        } catch {
             setMessage("Szerver hiba");
         }
     }
 
     async function updateProfile() {
-
         try {
-
-            const user = JSON.parse(
-                localStorage.getItem("user")
-            );
-
-            const response = await apiFetch(
-                "/profile",
-                {
-                    method: "PUT",
-
-                    body: JSON.stringify({
-                        fullName,
-                        phone,
-                        address,
-                        city
-                    })
-                }
-            );
+            const response = await apiFetch("/profile", {
+                method: "PUT",
+                body: JSON.stringify({ fullName, phone, address, city })
+            });
 
             if (!response.ok) {
                 setMessage("Mentés sikertelen");
                 return;
             }
-
-            setMessage("Profil frissítve");
-
-        }
-        catch {
-
+            setMessage("Profil sikeresen frissítve!");
+        } catch {
             setMessage("Szerver hiba");
         }
     }
 
     async function changePassword() {
-
         try {
-
-            const user = JSON.parse(
-                localStorage.getItem("user")
-            );
-
-            const response = await apiFetch(
-                "/profile/change-password",
-                {
-                    method: "POST",
-
-                    body: JSON.stringify({
-                        currentPassword,
-                        newPassword
-                    })
-                }
-            );
+            const response = await apiFetch("/profile/change-password", {
+                method: "POST",
+                body: JSON.stringify({ currentPassword, newPassword })
+            });
 
             if (!response.ok) {
                 setMessage("Jelszó módosítás sikertelen");
                 return;
             }
-
-            setMessage("Jelszó módosítva");
-
-        }
-        catch {
-
+            setMessage("Jelszó sikeresen módosítva!");
+            setCurrentPassword("");
+            setNewPassword("");
+        } catch {
             setMessage("Szerver hiba");
         }
     }
@@ -138,92 +80,63 @@ function Profile() {
     return (
         <>
             <Navbar />
-
             <div className="container">
+                <h1 style={{ textAlign: "center", marginBottom: "30px" }}>Fiókom beállításai</h1>
+                
+                {message && (
+                    <div className={`message ${message.includes("sikeresen") ? "success" : ""}`}>
+                        {message}
+                    </div>
+                )}
 
-                <div className="form-container">
+                <div className="profile-grid">
+                    {/* 1. Kártya: Személyes adatok */}
+                    <div className="profile-card">
+                        <h2>Személyes adatok</h2>
+                        
+                        <label className="input-label">E-mail cím</label>
+                        <input type="text" value={email} disabled style={{ backgroundColor: "#eaeaea", color: "#666" }} />
 
-                    <h1>Profil</h1>
+                        <label className="input-label">Teljes név</label>
+                        <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} />
 
-                    <h2>Adatok</h2>
+                        <label className="input-label">Telefonszám</label>
+                        <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
-                    <input
-                        type="text"
-                        placeholder="Email"
-                        value={email}
-                        disabled
-                    />
+                        <label className="input-label">Város</label>
+                        <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
 
-                    <input
-                        type="text"
-                        placeholder="Teljes név"
-                        value={fullName}
-                        onChange={(e) =>
-                            setFullName(e.target.value)
-                        }
-                    />
+                        <label className="input-label">Utca, házszám</label>
+                        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
 
-                    <input
-                        type="text"
-                        placeholder="Telefonszám"
-                        value={phone}
-                        onChange={(e) =>
-                            setPhone(e.target.value)
-                        }
-                    />
+                        <button onClick={updateProfile} style={{ marginTop: "20px", width: "100%" }}>Adatok mentése</button>
+                    </div>
 
-                    <input
-                        type="text"
-                        placeholder="Cím"
-                        value={address}
-                        onChange={(e) =>
-                            setAddress(e.target.value)
-                        }
-                    />
+                    {/* 2. Kártya: Jelszó módosítás */}
+                    <div className="profile-card">
+                        <h2>Biztonság</h2>
+                        
+                        <label className="input-label">Jelenlegi jelszó</label>
+                        <input
+                            type="password"
+                            placeholder="••••••••"
+                            value={currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                        />
 
-                    <input
-                        type="text"
-                        placeholder="Város"
-                        value={city}
-                        onChange={(e) =>
-                            setCity(e.target.value)
-                        }
-                    />
+                        <label className="input-label">Új jelszó</label>
+                        <input
+                            type="password"
+                            placeholder="••••••••"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                        />
 
-                    <button onClick={updateProfile}>
-                        Mentés
-                    </button>
-
-                    <hr />
-
-                    <h2>Jelszó módosítás</h2>
-
-                    <input
-                        type="password"
-                        placeholder="Jelenlegi jelszó"
-                        value={currentPassword}
-                        onChange={(e) =>
-                            setCurrentPassword(e.target.value)
-                        }
-                    />
-
-                    <input
-                        type="password"
-                        placeholder="Új jelszó"
-                        value={newPassword}
-                        onChange={(e) =>
-                            setNewPassword(e.target.value)
-                        }
-                    />
-
-                    <button onClick={changePassword}>
-                        Jelszó módosítás
-                    </button>
-
-                    <p>{message}</p>
-
+                        <button onClick={changePassword} style={{ marginTop: "20px", width: "100%", backgroundColor: "#28a745" }}>
+                            Jelszó módosítása
+                        </button>
+                    </div>
                 </div>
-
             </div>
         </>
     );
