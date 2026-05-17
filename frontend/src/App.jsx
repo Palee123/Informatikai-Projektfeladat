@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import CartPage from "./pages/CartPage";
+import ProductDetails from "./pages/ProductDetails";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
 
@@ -23,6 +26,12 @@ function App() {
                 <Route path="/register" element={<Register />} />
 
                 <Route path="/profile" element={<Profile />} />
+
+                <Route path="/cart" element={<CartPage />} />
+
+                <Route path="/product/:id" element={<ProductDetails />} />
+
+                <Route path="/favorites" element={<FavoritesPage />} />
 
             </Routes>
 

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 
 function Navbar() {
+    const [cartCount, setCartCount] = useState(0);
     const user = localStorage.getItem("user");
     const location = useLocation();
     
@@ -13,6 +14,35 @@ function Navbar() {
         const savedTheme = localStorage.getItem("app-theme") || "light";
         setTheme(savedTheme);
         document.documentElement.setAttribute("data-theme", savedTheme);
+    }, []);
+
+    useEffect(() => {
+
+        function updateCartCount() {
+
+            const storedCart =
+                JSON.parse(localStorage.getItem("cart")) || [];
+
+            const totalQuantity =
+                storedCart.reduce(
+                    (sum, item) => sum + item.quantity,
+                    0
+                );
+
+            setCartCount(totalQuantity);
+        }
+
+        updateCartCount();
+
+        window.addEventListener("storage", updateCartCount);
+
+        const interval = setInterval(updateCartCount, 300);
+
+        return () => {
+            window.removeEventListener("storage", updateCartCount);
+            clearInterval(interval);
+        };
+
     }, []);
 
     // Tema valtas
@@ -38,6 +68,14 @@ function Navbar() {
             <div className="nav">
                 <Link to="/" className={location.pathname === "/" ? "active-link" : ""}>
                     Főoldal
+                </Link>
+
+                <Link to="/favorites" className={location.pathname === "/favorites" ? "active-link" : ""}>
+                    Kedvencek
+                </Link>
+
+                <Link to="/cart" className={location.pathname === "/cart" ? "active-link" : ""}>
+                    Kosár ({cartCount})
                 </Link>
 
                 {!user ? (

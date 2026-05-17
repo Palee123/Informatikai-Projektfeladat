@@ -45,7 +45,7 @@ function Profile() {
         try {
             const response = await apiFetch("/profile", {
                 method: "PUT",
-                body: JSON.stringify({ fullName, phone, address, city })
+                body: JSON.stringify({ email, fullName, phone, address, city })
             });
 
             if (!response.ok) {
@@ -61,7 +61,7 @@ function Profile() {
     async function changePassword() {
         try {
             const response = await apiFetch("/profile/change-password", {
-                method: "POST",
+                method: "PUT",
                 body: JSON.stringify({ currentPassword, newPassword })
             });
 

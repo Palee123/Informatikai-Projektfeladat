@@ -82,11 +82,11 @@ namespace WebApplication1.Controllers
                 return NotFound();
 
             //Jelenlegi jelszó ellenőrzés
-            if (user.PasswordHash != dto.CurrentPassword)
+            if (!BCrypt.Net.BCrypt.Verify(dto.CurrentPassword, user.PasswordHash))
                 return BadRequest(new { message = "Hibás jelenlegi jelszó." });
 
             //Új jelszó mentése
-            user.PasswordHash = dto.NewPassword;
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
 
             await _context.SaveChangesAsync();
 

@@ -15,6 +15,7 @@ function Home() {
             id: 1,
             title: "Fehér Sneaker",
             description: "Modern fehér utcai cipő.",
+            meret: "42",
             price: 24990,
             categoryName: "Cipők",
             isUsed: false,
@@ -26,6 +27,7 @@ function Home() {
             id: 2,
             title: "Bézs Kabát",
             description: "Elegáns hosszú bézs kabát.",
+            meret: "M",
             price: 39990,
             categoryName: "Kabátok",
             isUsed: false,
@@ -37,6 +39,7 @@ function Home() {
             id: 3,
             title: "Cargo Nadrág",
             description: "Kényelmes zöld cargo nadrág.",
+            meret: "38",
             price: 18990,
             categoryName: "Nadrágok",
             isUsed: true,
@@ -48,6 +51,7 @@ function Home() {
             id: 4,
             title: "Fekete Póló",
             description: "Minimalista fekete póló.",
+            meret: "M",
             price: 8990,
             categoryName: "Pólók",
             isUsed: false,
@@ -59,6 +63,7 @@ function Home() {
             id: 5,
             title: "Nyári Ruha",
             description: "Könnyű nyári ruha mintával.",
+            meret: "S",
             price: 15990,
             categoryName: "Ruhák",
             isUsed: false,
@@ -70,6 +75,7 @@ function Home() {
             id: 6,
             title: "Fekete Tshirt",
             description: "Egyszerű fekete basic póló.",
+            meret: "XL",
             price: 6990,
             categoryName: "Pólók",
             isUsed: true,
@@ -78,7 +84,7 @@ function Home() {
         }
     ];
 
-    const [cart, setCart] = useState([]);
+    
     const [selectedCategory, setSelectedCategory] = useState("Összes");
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -88,6 +94,8 @@ function Home() {
     useEffect(() => {
 
         loadProducts();
+
+        localStorage.setItem("demoProducts", JSON.stringify(demoProducts));
 
     }, []);
 
@@ -118,44 +126,51 @@ function Home() {
 
     //CART LOGIKA
     function addToCart(product) {
-        const existingProduct = cart.find(
-            item => item.id === product.id
-        );
+
+        const storedCart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            ) || [];
+
+        const existingProduct =
+            storedCart.find(
+                item => item.id === product.id
+            );
+
+        let updatedCart;
 
         if (existingProduct) {
 
-            setCart(
-                cart.map(item =>
-                    item.id === product.id
-                        ? {
-                            ...item,
-                            quantity: item.quantity + 1
-                        }
-                        : item
-                )
+            updatedCart = storedCart.map(item =>
+
+                item.id === product.id
+                    ? {
+                        ...item,
+                        quantity: item.quantity + 1
+                    }
+                    : item
             );
 
         } else {
 
-            setCart([
-                ...cart,
+            updatedCart = [
+
+                ...storedCart,
+
                 {
                     ...product,
                     quantity: 1
                 }
-            ]);
+            ];
         }
-    }
 
-    function removeFromCart(indexToRemove) {
-
-        setCart(
-            cart.filter(
-                (item, index) =>
-                    index !== indexToRemove
-            )
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(updatedCart)
         );
     }
+
+    
 
     // products.filter DE EGYENLŐRE TESZTELÉSHEZ demoProducts
     const filteredProducts =    demoProducts.filter(product => {
@@ -222,10 +237,7 @@ function Home() {
 
                 </div>
 
-                <Cart
-                    cart={cart}
-                    removeFromCart={removeFromCart}
-                />
+
 
             </div>
         </>
