@@ -20,6 +20,11 @@ function ProductDetails() {
             }
 
             const data = await response.json();
+
+            console.log("API RESPONSE:", data);
+            console.log("MERET:", data.meret);
+            console.log("MERET NAGYBETU:", data.Meret);
+
             setProduct(data);
         } catch {
             setProduct(null);

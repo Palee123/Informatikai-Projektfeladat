@@ -13,5 +13,6 @@ namespace WebApplication1.DTOs.Product
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
         public string? ImageUrl { get; set; }
+        public string? Meret { get; set; }
     }
 }

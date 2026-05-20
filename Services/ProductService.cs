@@ -130,7 +130,8 @@ namespace WebApplication1.Services
                 SellerName = product.User?.Username ?? string.Empty,
                 CategoryId = product.CategoryId,
                 CategoryName = product.Category?.Name ?? string.Empty,
-                ImageUrl = product.ImageUrl
+                ImageUrl = product.ImageUrl,
+                Meret = product.Meret
             };
         }
     }

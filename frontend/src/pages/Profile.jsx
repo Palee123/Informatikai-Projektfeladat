@@ -150,6 +150,17 @@ function Profile() {
                 meret: "",
                 type: ""
             });
+            //console.log({
+            //    title: productForm.title,
+            //    description: productForm.description,
+            //    price: Number(productForm.price),
+            //    isUsed: productForm.isUsed,
+            //    userId: user.userId,
+            //    categoryId: Number(productForm.categoryId),
+            //    imageUrl: productForm.imageUrl,
+            //    meret: productForm.meret,
+            //    type: productForm.type
+            //});
             setMessage("Termék sikeresen létrehozva!");
         } catch {
             setMessage("Szerver hiba");
@@ -201,7 +212,7 @@ function Profile() {
                             type="password"
                             placeholder="••••••••"
                             value={currentPassword}
-                            onChange={(e) => setCurrentPassword(e.target.value)}
+                            onChange={(e) => setCurrentPassword(e.target.value)}    
                         />
 
                         <label className="input-label">Új jelszó</label>
