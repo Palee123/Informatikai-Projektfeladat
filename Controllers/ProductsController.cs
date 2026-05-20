@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using WebApplication1.DTOs.Product;
 using WebApplication1.Services;
 
@@ -79,5 +80,24 @@ public class ProductsController : ControllerBase
         }
 
         return Ok(result.Product);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await _productService.DeleteAsync(id);
+
+        if (result.IsNotFound)
+        {
+            return NotFound(result.ErrorMessage);
+        }
+
+        if (!result.IsSuccess)
+        {
+            return BadRequest(result.ErrorMessage);
+        }
+
+        return Ok(new { message = "Termek sikeresen torolve." });
     }
 }

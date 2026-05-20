@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { apiFetch } from "../services/api";
 import { Link } from "react-router";
@@ -22,7 +22,7 @@ function Login() {
 
             const data = await response.json();
             localStorage.setItem("user", JSON.stringify(data));
-            setMessage("Sikeres login");
+            setMessage("Sikeres bejelentkezés");
             window.location.href = "/";
         } catch (error) {
             setMessage("Szerver hiba");
@@ -32,7 +32,6 @@ function Login() {
     return (
         <>
             <Navbar />
-            {/* Középre igazít */}
             <div className="container" style={{ minHeight: "calc(100vh - 150px)", display: "flex", alignItems: "center" }}>
                 <div className="form-container">
                     <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Bejelentkezés</h2>
@@ -56,12 +55,11 @@ function Login() {
                     <button onClick={login} style={{ marginTop: "20px" }}>Belépés</button>
 
                     {message && (
-                        <div className={`message ${message === "Sikeres login" ? "success" : ""}`} style={{ marginTop: "20px" }}>
+                        <div className={`message ${message === "Sikeres bejelentkezés" ? "success" : ""}`} style={{ marginTop: "20px" }}>
                             {message}
                         </div>
                     )}
 
-                    {/* Reg link */}
                     <div style={{ marginTop: "20px", textAlign: "center", fontSize: "14px", color: "#666" }}>
                         Még nincs fiókod? <Link to="/register" style={{ color: "#007bff", textDecoration: "none", fontWeight: "bold" }}>Regisztrálj itt!</Link>
                     </div>

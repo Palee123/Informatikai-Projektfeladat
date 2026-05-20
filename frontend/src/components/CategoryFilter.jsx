@@ -1,22 +1,13 @@
-﻿function CategoryFilter({
+function CategoryFilter({
+    categories = [],
     selectedCategory,
     setSelectedCategory
 }) {
-
-    const categories = [
-        "Összes",
-        "Pólók",
-        "Nadrágok",
-        "Cipők",
-        "Kabátok",
-        "Ruhák"
-    ];
+    const filterOptions = ["Összes", ...categories];
 
     return (
         <div className="filters">
-
-            {categories.map(category => (
-
+            {filterOptions.map((category) => (
                 <button
                     key={category}
                     className={
@@ -24,15 +15,11 @@
                             ? "filter-button active"
                             : "filter-button"
                     }
-                    onClick={() =>
-                        setSelectedCategory(category)
-                    }
+                    onClick={() => setSelectedCategory(category)}
                 >
                     {category}
                 </button>
-
             ))}
-
         </div>
     );
 }

@@ -49,11 +49,28 @@ namespace WebApplication1.Services
                 Email = dto.Email,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 Username = dto.Username,
+                Role = "User"
             };
 
             await _userRepository.AddAsync(user);
 
             return true;
+        }
+
+        public async Task<User?> EnsureAdminUserAsync()
+        {
+            var hasAdmin = await _userRepository.HasAdminAsync();
+            if (hasAdmin)
+                return null;
+
+            var firstUser = await _userRepository.GetFirstUserAsync();
+            if (firstUser == null)
+                return null;
+
+            firstUser.Role = "Admin";
+            await _userRepository.UpdateAsync(firstUser);
+
+            return firstUser;
         }
     }
 }

@@ -103,6 +103,19 @@ namespace WebApplication1.Services
             return ProductActionResult.Success(MapToResponse(updatedProduct!));
         }
 
+        public async Task<ProductActionResult> DeleteAsync(int productId)
+        {
+            var product = await _productRepository.GetByIdAsync(productId);
+            if (product == null)
+            {
+                return ProductActionResult.Fail("A termek nem talalhato.", true);
+            }
+
+            await _productRepository.DeleteAsync(product);
+
+            return ProductActionResult.Success(MapToResponse(product));
+        }
+
         private static ProductResponseDto MapToResponse(Product product)
         {
             return new ProductResponseDto

@@ -45,7 +45,8 @@ namespace WebApplication1.Controllers
                 FullName = user.FullName,
                 Phone = user.Phone,
                 Address = user.Address,
-                City = user.City
+                City = user.City,
+                Role = user.Role ?? "User"
             };
         }
 

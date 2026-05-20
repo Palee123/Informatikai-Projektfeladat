@@ -43,7 +43,8 @@ public class AuthController : ControllerBase
             message = "Sikeres bejelentkezés",
             usertoken = token , 
             userId = user.Id,
-            email = user.Email
+            email = user.Email,
+            role = user.Role ?? "User"
         });
 
     }
@@ -80,6 +81,11 @@ public class AuthController : ControllerBase
         new Claim(
             ClaimTypes.Email,
             user.Email
+        ),
+
+        new Claim(
+            ClaimTypes.Role,
+            user.Role ?? "User"
         )
     };
 

@@ -1,46 +1,65 @@
 import { useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import { apiFetch } from "../services/api";
 
 function ProductDetails() {
     const { id } = useParams();
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState(undefined);
 
     useEffect(() => {
-        const demoProducts =
-            JSON.parse(localStorage.getItem("demoProducts")) || [];
-
-        const foundProduct = demoProducts.find(
-            item => item.id === Number(id)
-        );
-
-        setProduct(foundProduct);
+        loadProduct();
     }, [id]);
 
-    function addToCart(product) {
-        const storedCart =
-            JSON.parse(localStorage.getItem("cart")) || [];
+    async function loadProduct() {
+        try {
+            const response = await apiFetch(`/Products/${id}`);
+            if (!response.ok) {
+                setProduct(null);
+                return;
+            }
+
+            const data = await response.json();
+            setProduct(data);
+        } catch {
+            setProduct(null);
+        }
+    }
+
+    function addToCart(selectedProduct) {
+        const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
         const existingProduct = storedCart.find(
-            item => item.id === product.id
+            (item) => item.id === selectedProduct.id
         );
 
         let updatedCart;
 
         if (existingProduct) {
-            updatedCart = storedCart.map(item =>
-                item.id === product.id
+            updatedCart = storedCart.map((item) =>
+                item.id === selectedProduct.id
                     ? { ...item, quantity: item.quantity + 1 }
                     : item
             );
         } else {
             updatedCart = [
                 ...storedCart,
-                { ...product, quantity: 1 }
+                { ...selectedProduct, quantity: 1 }
             ];
         }
 
         localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
+
+    if (product === undefined) {
+        return (
+            <>
+                <Navbar />
+                <div className="container">
+                    <h2>Betöltés...</h2>
+                </div>
+            </>
+        );
     }
 
     if (!product) {
@@ -62,7 +81,7 @@ function ProductDetails() {
             <div className="container">
                 <div className="product-details">
                     <img
-                        src={product.imageUrl}
+                        src={product.imageUrl || "/images/default.jpg"}
                         alt={product.title}
                         className="details-image"
                     />
@@ -78,7 +97,7 @@ function ProductDetails() {
 
                         <p>
                             <strong>Méret:</strong>{" "}
-                            {product.meret}
+                            {product.meret || "-"}
                         </p>
 
                         <p>

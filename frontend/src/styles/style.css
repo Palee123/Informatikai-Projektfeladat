@@ -168,6 +168,18 @@ input {
     transition: 0.3s;
 }
 
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid var(--border-input);
+    background-color: var(--bg-input);
+    color: var(--text-main);
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+}
+
 input:focus {
     border-color: var(--primary);
 }
@@ -349,6 +361,18 @@ p { margin-top: 15px; }
     color: var(--text-heading);
 }
 .input-label { display: block; margin-top: 15px; font-weight: bold; color: var(--text-main); font-size: 14px; }
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    color: var(--text-main);
+    font-weight: bold;
+}
+.checkbox-row input {
+    width: auto;
+    margin-top: 0;
+}
 .message {
     margin: 0 auto 20px auto;
     max-width: 500px;
@@ -475,4 +499,13 @@ p { margin-top: 15px; }
 .favorite-btn:hover {
     transform: scale(1.08);
     background: rgba(255,255,255,0.15);
+}
+
+.admin-delete-btn {
+    margin-top: 10px;
+    background-color: #dc3545;
+}
+
+.admin-delete-btn:hover {
+    background-color: #b52a37;
 }
