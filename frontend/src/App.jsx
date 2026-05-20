@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import CartPage from "./pages/CartPage";
 import ProductDetails from "./pages/ProductDetails";
 import FavoritesPage from "./pages/FavoritesPage";
+import Checkout from "./pages/Checkout";
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetails />} />
 
                 <Route path="/favorites" element={<FavoritesPage />} />
+
+                <Route path="/checkout" element={<Checkout />} />
 
             </Routes>
 

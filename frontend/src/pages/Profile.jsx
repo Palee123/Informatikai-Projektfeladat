@@ -85,6 +85,23 @@ function Profile() {
                 setMessage("Mentés sikertelen");
                 return;
             }
+            const currentUser =
+                JSON.parse(localStorage.getItem("user"));
+
+            const updatedUser = {
+                ...currentUser,
+                email,
+                fullName,
+                phoneNumber: phone,
+                address,
+                city,
+                role
+            };
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(updatedUser)
+            );
             setMessage("Profil sikeresen frissítve!");
         } catch {
             setMessage("Szerver hiba");

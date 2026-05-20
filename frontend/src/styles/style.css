@@ -509,3 +509,98 @@ p { margin-top: 15px; }
 .admin-delete-btn:hover {
     background-color: #b52a37;
 }
+
+
+/*CHECKOUT*/ 
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 30px;
+    margin-top: 30px;
+    align-items: start;
+}
+
+.checkout-form,
+.checkout-summary {
+    background-color: var(--bg-element);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+    .checkout-form h2,
+    .checkout-summary h2 {
+        margin-bottom: 24px;
+    }
+
+    .checkout-form textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 12px;
+        margin-top: 10px;
+        border: 1px solid var(--border-input);
+        background-color: var(--bg-input);
+        color: var(--text-main);
+        border-radius: 6px;
+        font-size: 16px;
+        resize: vertical;
+        outline: none;
+    }
+
+        .checkout-form textarea:focus {
+            border-color: var(--primary);
+        }
+
+    .checkout-form button {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .checkout-summary div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .checkout-summary p {
+        margin: 0;
+    }
+
+    .checkout-summary hr {
+        margin: 20px 0;
+        border: none;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .checkout-summary h3 {
+        text-align: right;
+        color: var(--primary);
+        font-size: 28px;
+    }
+
+.payment-title {
+    margin-top: 35px;
+}
+
+.card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.checkout-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+@media (max-width: 900px) {
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+}

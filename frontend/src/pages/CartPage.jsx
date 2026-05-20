@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import Navbar from "../components/Navbar";
 
 function CartPage() {
@@ -56,15 +57,23 @@ function CartPage() {
                     )}
 
                     {cart.length > 0 && (
-                        <h2 className="cart-total">
-                            Összesen:{" "}
-                            {cart.reduce(
-                                (sum, item) =>
-                                    sum + item.price * item.quantity,
-                                0
-                            )}{" "}
-                            Ft
-                        </h2>
+                        <>
+                            <h2 className="cart-total">
+                                Összesen:{" "}
+                                {cart.reduce(
+                                    (sum, item) =>
+                                        sum + item.price * item.quantity,
+                                    0
+                                )}{" "}
+                                Ft
+                            </h2>
+
+                            <Link to="/checkout">
+                                <button className="checkout-btn">
+                                    Tovább a fizetéshez
+                                </button>
+                            </Link>
+                        </>
                     )}
                 </div>
             </div>
